@@ -6,7 +6,8 @@
 		"dev": "nodemon ./src/index.js",
 		"lint": "eslint --fix src/*.js || true",
 		"init": "npm i && clear && npm start",
-		"test": "mocha ./src/api/tests/*"
+		"test": "mocha ./src/api/tests/*",
+		"git": "git fetch && git pull origin master",
 	},
 	"devDependencies": {
 		"body-parser": "^1.18.2",
