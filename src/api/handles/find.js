@@ -5,5 +5,5 @@ const {
 	query
 } = require('./re/query')
 exports.handle = wrapper((item, callback) => {
-	item.meta.model.findOne(query(item), callback)
+	item.meta.model.find(query(item), callback)
 })
