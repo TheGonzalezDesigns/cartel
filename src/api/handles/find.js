@@ -1,7 +1,9 @@
 const {
 	wrapper
-} = require('./wrapper')
-
+} = require('./re/wrapper')
+const {
+	query
+} = require('./re/query')
 exports.handle = wrapper((item, callback) => {
-	item.meta.model.findOne(item.meta.query, callback)
+	meta.model.findOne(query(item), callback)
 })
