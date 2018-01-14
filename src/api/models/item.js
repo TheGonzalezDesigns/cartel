@@ -6,8 +6,7 @@ const schema = new Schema({
 	category: String,
 	price: Number,
 	photo: String,
-	description: String,
-	index: Number
+	description: String
 }, {
 	usePushEach: true
 })
