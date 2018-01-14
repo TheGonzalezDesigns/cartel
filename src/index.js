@@ -1,21 +1,20 @@
 const express = require('express')
-const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const server = express()
-
+const {
+	guide
+} = require('./api/guide')
+const database = require('./api/database')
 server.use(morgan('combined'))
-server.use(bodyParser.json())
+server.use(express.json({
+	strict: false
+}))
 server.set('trust proxy', true)
 server.set('trust proxy', 'loopback')
 
-server.get('/get', (req, res) => {
-	res.send(handle.get(req.body.query))
+server.post('/', (req, res) => {
+	const data = guide(req)
+	res.send(data)
 })
 
-server.post('/post', (req, res) => {
-	res.send(handle.post({
-		"data": req.body.data
-	}))
-})
-
-server.listen(3000)
+server.listen(3000, database.connect)
