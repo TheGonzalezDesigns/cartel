@@ -14,9 +14,18 @@ server.use(express.json({
 server.set('trust proxy', true)
 server.set('trust proxy', 'loopback')
 
+server.get('/', (req, res) => res.send('Connection achieved!'))
+
 server.post('/', (req, res) => {
 	const data = guide(req)
 	res.send(data)
 })
 
-server.listen(3000, database.connect)
+try {
+	server.listen(8888, () => {
+		database.connect()
+		console.log('Listening on ', 8888)
+	})
+} catch (error) {
+	console.error('Error:', error)
+}
