@@ -23,7 +23,7 @@ server.post('/', (req, res) => {
 
 try {
 	server.listen(8888, () => {
-		database.connect()
+		//database.connect()
 		console.log('Listening on ', 8888)
 	})
 } catch (error) {
