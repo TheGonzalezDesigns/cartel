@@ -7,6 +7,12 @@ const cors = require('cors')
 const {
 	guide
 } = require('./api/guide')
+const {
+	validate
+} = require('./api/validate')
+const {
+	reject
+} = require('./api/reject')
 
 server.use(morgan('combined'))
 server.use(express.json({
@@ -19,7 +25,8 @@ server.use(cors())
 server.get('/', (req, res) => res.send('Connection achieved, bish!'))
 
 server.post('/', (req, res) => {
-	const data = guide(req)
+	req = req.body
+	const data = validate(req) ? guide(req) : reject(req)
 	res.send(data)
 })
 
