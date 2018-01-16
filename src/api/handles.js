@@ -1,10 +1,6 @@
-const routes = [
-	// '_delete',
-	'find',
-	// 'nesting',
-	'save',
-	'update'
-]
+const {
+	routes
+} = require('./routes')
 let handles = {}
 routes.forEach((route) => {
 	let {
