@@ -24,15 +24,18 @@ server.use(cors())
 
 server.get('/', (req, res) => res.send('Connection achieved, bish!'))
 
-server.post('/', (req, res) => {
+server.post('/', async (req, res) => {
 	req = req.body
-	const data = validate(req) ? guide(req) : reject(req)
+	console.log('Recieved:', req)
+	const data = validate(req) ? await guide(req) : reject(req)
+	console.log('Sending:', data)
 	res.send(data)
 })
 
 const init = () => {
 	console.warn(`Listening on ${dynamix.port}`)
-	database.connect()
+	database.connect(dynamix.database)
 }
 
 server.listen(dynamix.port, init)
+database.disconnect()
