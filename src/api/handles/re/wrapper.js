@@ -15,27 +15,31 @@ exports.wrapper = (actionOn) => {
 			responses.push(respond(false))
 			return responses
 		}
-		console.log('\nData:', data)
-		console.log('\n')
 		if (data['metaOnly']) {
 			let meta = data.meta
 			meta['model'] = _Model
 			try {
-				const result = await actionOn(meta)
-				console.log('Response', result)
-				responses.push(result)
+				const res = await actionOn(meta)
+				console.log('Response @ wrapper.js', res)
+				return res
 			} catch (error) {
 				console.error(error)
 				responses.push(respond(false))
 			}
 		} else {
 			if (data) {
-				data.forEach(async (item) => {
-					item.meta['actual'] = new _Model(item.data)
+				data.forEach((item) => {
+					console.log('Item:', item)
+					const actual = new _Model(item.data)
+					item['meta'] = {
+						actual: actual
+					}
+					console.log('Actual:\t', actual)
+					if (item.data.did !== '') item.meta.actual['_id'] = item.data['_id']
 					item.meta['model'] = _Model
 					try {
-						const result = await actionOn(item)
-						responses.push(result)
+						const res = actionOn(item)
+						responses.push(res)
 					} catch (error) {
 						console.error(error)
 						responses.push(respond(false))
