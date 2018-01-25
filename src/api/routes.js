@@ -1,4 +1,6 @@
 exports.routes = [
 	'find',
-	'update'
+	'update',
+	'login',
+	'logout'
 ]
