@@ -25,32 +25,32 @@ Object.compare = function (obj1, obj2, verbose = true) {
 		if (verbose) console.log('Passed')
 		if (verbose) console.log('Now deeply comparing', _p)
 		switch (typeof (obj1[p])) {
-			// Deep compare objects
-			case 'object':
-				if (verbose) console.log('Entering sub-object...')
-				if (!Object.compare(obj1[p], obj2[_p])) {
-					console.log('Failed @l27')
-					return false
-				}
-				break
-				// Compare function code
-			case 'function':
-				if (verbose) console.log('Evaluating function...')
-				if (typeof (obj2[_p]) === 'undefined' || (p !== 'compare' && obj1[p].toString() !== obj2[_p].toString())) return false
-				break
-				// Compare values
-			default:
-				if (verbose) console.log('Comparing values...')
-				if (verbose) console.log('Checking for empty values...')
-				if (obj1[p] === '' && obj2[_p] !== '') return false
-				if (obj2[_p] === '' && obj1[p] !== '') return false
-				if (verbose) console.log('No empty values found')
-				// Tests for equality if the key contains an '!' appended as
-				if (strict) {
-					if (verbose) console.log('Testing values for equality')
-					if (obj1[p] !== obj2[_p]) return false
-					if (verbose) console.log(`Values are equivalent: [${obj1[p]}, ${obj2[_p]}]`)
-				} else if (verbose) console.log('Currently valid...')
+		// Deep compare objects
+		case 'object':
+			if (verbose) console.log('Entering sub-object...')
+			if (!Object.compare(obj1[p], obj2[_p])) {
+				console.log('Failed @l27')
+				return false
+			}
+			break
+			// Compare function code
+		case 'function':
+			if (verbose) console.log('Evaluating function...')
+			if (typeof (obj2[_p]) === 'undefined' || (p !== 'compare' && obj1[p].toString() !== obj2[_p].toString())) return false
+			break
+			// Compare values
+		default:
+			if (verbose) console.log('Comparing values...')
+			if (verbose) console.log('Checking for empty values...')
+			if (obj1[p] === '' && obj2[_p] !== '') return false
+			if (obj2[_p] === '' && obj1[p] !== '') return false
+			if (verbose) console.log('No empty values found')
+			// Tests for equality if the key contains an '!' appended as
+			if (strict) {
+				if (verbose) console.log('Testing values for equality')
+				if (obj1[p] !== obj2[_p]) return false
+				if (verbose) console.log(`Values are equivalent: [${obj1[p]}, ${obj2[_p]}]`)
+			} else if (verbose) console.log('Currently valid...')
 		}
 		if (verbose) console.log(`\n${_p} Passed\n`)
 	}
