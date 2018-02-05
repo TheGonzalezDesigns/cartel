@@ -1,5 +1,8 @@
 exports.routes = [
 	'find',
 	'update',
-	'createUser'
+	'createUser',
+	'findUser',
+	'createSchedule',
+	'findSchedule'
 ]
