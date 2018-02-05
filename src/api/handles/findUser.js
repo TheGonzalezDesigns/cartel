@@ -5,7 +5,7 @@ exports.handle = wrapper(async (meta) => {
 	let res = await meta.model.find({}, (err, docs) => {
 		return docs || err
 	})
-	console.log('Response @ find.js', res)
+	console.log('Response @ findUser.js', res)
 	return res
 })
 
