@@ -16,7 +16,7 @@ exports.handle = wrapper(async item => {
 			'_id': id
 		}
 		res = item.data.delete ? await item.meta.model.findOneAndRemove(query, callback) : item.data.modified ? await item.meta.model.findOneAndUpdate(query, item.data, callback, {
-			new: true
+			upsert: true
 		}) : `No action taken for ${item.data.name}:${id}`
 	} else {
 		res = await item.meta.actual.save(callback)
